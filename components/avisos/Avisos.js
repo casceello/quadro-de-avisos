@@ -23,7 +23,20 @@ function salvar(aviso){
 })
 } //fim do salvar
 
+/**
+ * Seleciona todos os avisos cadastrados
+ * @returns {object} Objeto com todos os avisos cadastrados ou mensagem de rro
+ */
 
-module.exports = {salvar}
+function selecionarTodos(){
+ return db.select('*').from('avisos')
+ .then(avisos =>{ return avisos })
+ .catch(erro => { 
+   return { tipo: "erro", corpo: "Erro: " + erro} 
+})
+
+}//fim do selecionar todos
+
+module.exports = {salvar, selecionarTodos}
 
 
