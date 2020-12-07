@@ -31,7 +31,7 @@
         <table class="table">
           <thead >
             <tr>
-              <th scope="col">#</th>
+              <th scope="col">ID</th>
               <th scope="col">Título</th>
               <th scope="col">Data</th>
               <th scope="col">Ações</th>
@@ -53,7 +53,10 @@
                 <td> <%= moment(aviso.data).format("DD/MM/YYYY") %> </td>
                 <td>
                   <button class="btn btn-dark">Alterar</button>
-                  <button class="btn btn-danger">Excluir</button>
+                  <button class="btn btn-danger" 
+                  data-toggle="modal" 
+                  data-target="#excluirModal"
+                  onclick="excluir(event,'<%= aviso.ID_avisos %>')">Excluir</button>
                 </td>
               </tr>
 
@@ -73,8 +76,70 @@
 
   </div> <!--container-->
 
+<!-- Modal -->
+<div class="modal fade" id="excluirModal" tabindex="-1" aria-labelledby="excluirModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Deseja realmente excluir este aviso?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       
+        <table class="table">
+
+          <thead >
+            <tr>
+
+              <th scope="col">ID</th>
+              <th scope="col">Título</th>
+              <th scope="col">Data</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="modal-tr-body">
+              <td>ID</td>
+              <td>Título</td>
+              <td>Data</td>
+            </tr>
+            </tbody>
+            </table>
+
+      </div>
+      <div class="modal-footer">
+       
+        <form id="form-excluir" method="GET">
+          <button type="submit" class="btn btn-dark">Sim</button>
+        </form>
+        
+        <button type="button" class="btn btn-danger">Não</button>
+      </div>
+    </div>
+  </div>
+</div>
+
   <!-- incluir os scripts do bootstrap -->
   <%- include('./partials/script_import.ejs') %>
+
+  <!-- nosso script -->
+  <script>
+    function excluir(event, id){
+
+      var tdBotoes = event.target.parentElement
+      var trAviso = tdBotoes.parentElement
+      var trModal = document.getElementById("modal-tr-body")
+
+      var formExcluir = document.getElementById("form-excluir")
+      formExcluir.action = "avisos/excluir/"+id
+
+      trModal.innerHTML = trAviso.innerHTML
+      trModal.removeChild(trModal.lastElementChild)
+    }
+  </script>
+
 </body>
 
 </html>
