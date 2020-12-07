@@ -1,0 +1,8 @@
+ .bg-grey{
+   background: #141414
+ }
+
+ .gradient-grey{
+  background: rgb(38,38,38);
+  background: linear-gradient(90deg, rgba(38,38,38,1) 0%, rgba(0,0,0,0.944397742006959) 94%);
+ }
