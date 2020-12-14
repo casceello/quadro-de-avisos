@@ -52,7 +52,7 @@ function editar(aviso, id){
  */
 
 function selecionarTodos(){
- return db.select('*').from('avisos')
+ return db.select('*').from('avisos').orderBy('data','ASC')
  .then(avisos =>{ return avisos })
  .catch(erro => { 
    return { tipo: "erro", corpo: "Erro: " + erro} 
